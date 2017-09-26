@@ -1,0 +1,254 @@
+<html>
+	<head>
+	    <meta charset="UTF-8">
+	    <link rel="shortcut icon" href="../images/ico_image.ico">
+	    <title>Pettner</title>
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<style>
+			.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+ul.vetList{
+	list-style: none;
+}
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+		</style>
+
+		<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+ 
+<script>
+$.fn.setPreview = function(opt){
+    "use strict"
+    var defaultOpt = {
+        inputFile: $(this),
+        img: null,
+        w: 100,
+        h: 236
+    };
+    $.extend(defaultOpt, opt);
+ 
+    var previewImage = function(){
+        if (!defaultOpt.inputFile || !defaultOpt.img) return;
+ 
+        var inputFile = defaultOpt.inputFile.get(0);
+        var img       = defaultOpt.img.get(0);
+ 
+        // FileReader
+        if (window.FileReader) {
+            // image 파일만
+            if (!inputFile.files[0].type.match(/image\//)) return;
+ 
+            // preview
+            try {
+                var reader = new FileReader();
+                reader.onload = function(e){
+                    img.src = e.target.result;
+                    img.style.width  = defaultOpt.w+'%';
+                    img.style.height = defaultOpt.h+'px';
+                    img.style.display = '';
+                }
+                reader.readAsDataURL(inputFile.files[0]);
+
+            } catch (e) {
+                // exception...
+            }
+            console.log(inputFile.files[0].name);
+        // img.filters (MSIE)
+        } else if (img.filters) {
+            inputFile.select();
+            inputFile.blur();
+            var imgSrc = document.selection.createRange().text;
+ 
+            img.style.width  = defaultOpt.w+'%';
+            img.style.height = defaultOpt.h+'px';
+            img.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(enable='true',sizingMethod='scale',src=\""+imgSrc+"\")";
+            img.style.display = '';
+        // no support
+        } else {
+            // Safari5, ...
+        }
+    };
+ 
+    // onchange
+    $(this).change(function(){
+        previewImage();
+    });
+};
+ 
+ 
+$(document).ready(function(){
+    var opt = {
+        img: $('#img_preview'),
+        w: 100,
+        h: 236
+    };
+    $('#input_file').setPreview(opt);
+});
+</script>
+
+
+	</head>
+	<body>
+	<form action="/webHospital/<%= id %>" method="post">
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+	    		<div class="navbar-header">
+	    			<a class="navbar-brand" href="#">Pettner</a>
+	    		</div>
+	    		<ul class="nav navbar-nav">
+	    			<li class="active"><a href="/webHospital/<%= id %>">병원 소개</a></li>
+	      			<li><a href="/webReserv/<%=id%>">예약 관리</a></li>
+	    			<li><a href="/webUsers/<%=id%>">고객 관리</a></li>
+	    			<li><a href="/webQna/<%= id %>">질문 관리</a></li>
+	    		</ul>
+	    		<ul class="nav navbar-nav navbar-right">
+	    			<li><label class="switch">
+							<%if(onOff==0){%>
+								<input type="checkbox" name="onOff" value="1">
+							<%}else{%>
+								<input type="checkbox" name="onOff" value="1" checked>
+							<%}%>
+							<span class="slider round"></span>
+						</label>
+					</li>
+	      			<li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+	    		</ul>
+	  		</div>
+		</nav>
+
+		
+
+		<div class="form-group">
+	     	<label for="name">병원 이름:</label>
+	    	<input type="text" class="form-control" name="name" value="<%=name%>">
+	    </div>
+	    <%if(originalPhotoUrl){%>
+	    	<img src="/images/dogimage1.png" class="img-rounded" alt="Cinque Terre" width="100%" height="236" id="img_preview"><br>
+		<%}else{%>
+			<img src="/images/hospital.png" class="img-rounded" alt="Cinque Terre" width="100%" height="236" id="img_preview"><br>
+		<%}%>
+		
+
+		<label for="poster">사진 변경</label>
+		<input type="file" id="input_file" name="poster" />
+
+
+
+	    <div class="form-group">
+	    	<label for="address">주소:</label>
+	    	<input type="text" class="form-control" name="address" value="<%=address%>">
+	    </div>
+	    <div class="form-group">
+	    	<label for="phone">전화번호</label>
+	    	<input type="text" class="form-control" name="phone" value="<%=tel%>">
+	    </div>
+	    <div class="form-group">
+	    	<label for="daysStart">평일</label>
+	    	<input type="text" class="form-control" name="daysStart" value="<%=daysStart%>">~<input type="text" class="form-control" name="daysFinish" value="<%=daysFinish%>">
+	    </div>
+	    <div class="form-group">
+	    	<label for="endStart">주말</label>
+	    	<input type="text" class="form-control" name="endStart" value="<%=endStart%>">~<input type="text" class="form-control" name="endFinish" value="<%=endFinish%>">
+	    </div>
+	    <div class="form-group">
+	    	<label for="daysLunchStart">평일 점심</label>
+	    	<input type="text" class="form-control" name="daysLunchStart" value="<%=daysLunchStart%>">~<input type="text" class="form-control" name="daysLunchFinish" value="<%=daysLunchFinish%>">
+	    </div>
+	    <div class="form-group">
+	    	<label for="endLunchStart">주말 점심</label>
+	    	<input type="text" class="form-control" name="endLunchStart" value="<%=endLunchStart%>">~<input type="text" class="form-control" name="endLunchFinish" value="<%=endLunchFinish%>">
+	    </div>
+	    
+
+
+		<div class="form-group">
+			<label for="subject">진료 과목</label>
+		   	<ul>
+		      	<% for(var i = 0 ; i < hospitalSubjects.length ; i++ ) { %>
+		         	<li><%= hospitalSubjects[i].subject %></li>
+		      	<% } %>
+		   	</ul>
+		</div>
+
+
+		<div>
+			<label for="vetList">의료진</label>
+		   <ul class="vetList">
+		      <% for(var i = 0 ; i < vets.length ; i++ ) { %>
+		        <%if(vets[i].originalPhotoUrl){%>
+		         	<li><img src="<%=vets[i].originalPhotoUrl%>" class="img-circle" alt="Cinque Terre" width="100" height="100"><%= vets[i].name %>  <%= vets[i].subject %></li>
+		        <%}else{%>
+		        	<li><img src="/images/personal.png" class="img-circle" alt="Cinque Terre" width="100" height="100"><%= vets[i].name %>  <%= vets[i].subject %></li>
+		        <%}%>
+		      <% } %>
+		   </ul>
+		</div>
+		<br>
+		<div class="form-group">
+			<label for="introduce">병원 소개</label>
+			<textarea class="form-control" rows="5" name="introduce"><%=introduce%></textarea>
+		</div>
+
+		<div class="form-group">
+	    	<label for="lnglat">병원 위치</label>
+	    	<input type="text" class="form-control" name="lng" value="<%=lng%>">~<input type="text" class="form-control" name="lat" value="<%=lat%>">
+	    </div>
+
+		<button type="submit" class="btn"> 수정 </button>
+
+	</body>
+</html>

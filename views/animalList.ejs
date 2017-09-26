@@ -1,0 +1,259 @@
+<html>
+	<head>
+	    <meta charset="UTF-8">
+	    <link rel="shortcut icon" href="../images/ico_image.ico">
+	    <title>Pettner</title>
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	</head>
+	<body>
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+	    		<div class="navbar-header">
+	    			<a class="navbar-brand" href="/webUsers/<%= data[0].animalId %>"><i class="glyphicon glyphicon-arrow-left"></i></a>
+	    		</div>
+	    		<ul class="nav navbar-nav navbar-right">
+	      			<li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+	    		</ul>
+	  		</div>
+		</nav>
+
+		<div>	
+			<ul>
+		    	<% for(var i = 0 ; i < data.length ; i++ ) { %>
+		        	<% if(data[i].recordType==1){ %>
+		        		<%if(data[i].recordFloat==0||data[i].recordFloat==1){%>
+		        			<li>간장 <%= data[i].recordFloat %> 정상</li>	
+		        		<%}else{%>
+			        		<li><form action="/webAnimals/<%=data[i].animalId%>" method="post">
+			        			<input type="hidden" name="id" id="id" value="<%=data[i].id%>" >
+			        			간장 <%= data[i].recordFloat %> 비정상
+				        		<div class="form-group">
+									<label for="prescriptText">의견</label>
+									<div class="radio">
+
+							  			<label>
+							  				<%if(data[i].prescriptIcon==1){%>
+							  					<input type="radio" name="prescriptIcon" value="1" checked>
+							  				<%}else{%>
+							  					<input type="radio" name="prescriptIcon" value="1">
+							  				<%}%>
+							  				아주 아파요
+							  			</label>
+							  			<img src="/images/emotion1.png" class="img-rounded" alt="Cinque Terre" width="50" height="50">
+									</div>
+									
+									<div class="radio">
+							  			<label>
+							  				<%if(data[i].prescriptIcon==2){%>
+							  					<input type="radio" name="prescriptIcon" value="2" checked>
+							  				<%}else{%>
+							  					<input type="radio" name="prescriptIcon" value="2">
+							  				<%}%>
+							  				아파요
+							  			</label>
+							  			<img src="/images/emotion2.png" class="img-rounded" alt="Cinque Terre" width="50" height="50">
+									</div>
+								
+									<div class="radio">
+							  			<label>
+							  				<%if(data[i].prescriptIcon==3){%>
+							  					<input type="radio" name="prescriptIcon" value="3" checked>
+							  				<%}else{%>
+							  					<input type="radio" name="prescriptIcon" value="3">
+							  				<%}%>
+							  				이상있어요
+							  			</label>
+							  			<img src="/images/emotion3.png" class="img-rounded" alt="Cinque Terre" width="50" height="50">
+									</div>
+								
+									<div class="radio">
+							  			<label>
+							  				<%if(data[i].prescriptIcon==4){%>
+							  					<input type="radio" name="prescriptIcon" value="4" checked>
+							  				<%}else{%>
+							  					<input type="radio" name="prescriptIcon" value="4">
+							  				<%}%>
+							  				건강해요
+							  			</label>
+							  			<img src="/images/emotion4.png" class="img-rounded" alt="Cinque Terre" width="50" height="50">
+									</div>
+								
+									<div class="radio">
+							  			<label>
+							  				<%if(data[i].prescriptIcon==5){%>
+							  					<input type="radio" name="prescriptIcon" value="5" checked>
+							  				<%}else{%>
+							  					<input type="radio" name="prescriptIcon" value="5">
+							  				<%}%>
+							  				아주 건강해요
+							  			</label>
+							  			<img src="/images/emotion5.png" class="img-rounded" alt="Cinque Terre" width="50" height="50">
+									</div>
+									
+									<textarea class="form-control" rows="5" name="prescriptText"><%=data[i].prescriptText%></textarea>
+								</div>
+								<button type="submit" class="btn"> 등록 </button>
+							</form></li>
+			        	<%}%>
+		            <%}%>
+		         	<% if(data[i].recordType==2){ %>
+		         		<%if(data[i].recordFloat==0||data[i].recordFloat==1){%>
+		        			<li>당뇨 <%= data[i].recordFloat %> 정상</li>
+		        		<%}else{%>
+			        		<li><form action="/webAnimals/<%=data[i].animalId%>" method="post">
+			        			<input type="hidden" name="id" id="id" value="<%=data[i].id%>" >
+			        			당뇨 <%= data[i].recordFloat %> 비정상
+			        			<div class="form-group">
+									<label for="prescriptText">의견</label>
+									<div class="radio">
+
+							  			<label>
+							  				<%if(data[i].prescriptIcon==1){%>
+							  					<input type="radio" name="prescriptIcon" value="1" checked>
+							  				<%}else{%>
+							  					<input type="radio" name="prescriptIcon" value="1">
+							  				<%}%>
+							  				아주 아파요
+							  			</label>
+							  			<img src="/images/emotion1.png" class="img-rounded" alt="Cinque Terre" width="50" height="50">
+									</div>
+									
+									<div class="radio">
+							  			<label>
+							  				<%if(data[i].prescriptIcon==2){%>
+							  					<input type="radio" name="prescriptIcon" value="2" checked>
+							  				<%}else{%>
+							  					<input type="radio" name="prescriptIcon" value="2">
+							  				<%}%>
+							  				아파요
+							  			</label>
+							  			<img src="/images/emotion2.png" class="img-rounded" alt="Cinque Terre" width="50" height="50">
+									</div>
+								
+									<div class="radio">
+							  			<label>
+							  				<%if(data[i].prescriptIcon==3){%>
+							  					<input type="radio" name="prescriptIcon" value="3" checked>
+							  				<%}else{%>
+							  					<input type="radio" name="prescriptIcon" value="3">
+							  				<%}%>
+							  				이상있어요
+							  			</label>
+							  			<img src="/images/emotion3.png" class="img-rounded" alt="Cinque Terre" width="50" height="50">
+									</div>
+								
+									<div class="radio">
+							  			<label>
+							  				<%if(data[i].prescriptIcon==4){%>
+							  					<input type="radio" name="prescriptIcon" value="4" checked>
+							  				<%}else{%>
+							  					<input type="radio" name="prescriptIcon" value="4">
+							  				<%}%>
+							  				건강해요
+							  			</label>
+							  			<img src="/images/emotion4.png" class="img-rounded" alt="Cinque Terre" width="50" height="50">
+									</div>
+								
+									<div class="radio">
+							  			<label>
+							  				<%if(data[i].prescriptIcon==5){%>
+							  					<input type="radio" name="prescriptIcon" value="5" checked>
+							  				<%}else{%>
+							  					<input type="radio" name="prescriptIcon" value="5">
+							  				<%}%>
+							  				아주 건강해요
+							  			</label>
+							  			<img src="/images/emotion5.png" class="img-rounded" alt="Cinque Terre" width="50" height="50">
+									</div>
+									
+									<textarea class="form-control" rows="5" name="prescriptText"><%=data[i].prescriptText%></textarea>
+								</div>
+								<button type="submit" class="btn"> 등록 </button>
+							</form></li>
+			        	<%}%>
+
+		         		
+		         	<%}%>
+		         	<% if(data[i].recordType==3){ %>
+		         		<%if(data[i].recordFloat==0||data[i].recordFloat==1){%>
+		        			<li>신장 <%= data[i].recordFloat %> 정상</li>
+		        		<%}else{%>
+			        		<li><form action="/webAnimals/<%=data[i].animalId%>" method="post">
+			        			<input type="hidden" name="id" id="id" value="<%=data[i].id%>" >
+			        			신장 <%= data[i].recordFloat %> 비정상
+			        			<div class="form-group">
+									<label for="prescriptText">의견</label>
+									<div class="radio">
+
+							  			<label>
+							  				<%if(data[i].prescriptIcon==1){%>
+							  					<input type="radio" name="prescriptIcon" value="1" checked>
+							  				<%}else{%>
+							  					<input type="radio" name="prescriptIcon" value="1">
+							  				<%}%>
+							  				아주 아파요
+							  			</label>
+							  			<img src="/images/emotion1.png" class="img-rounded" alt="Cinque Terre" width="50" height="50">
+									</div>
+									
+									<div class="radio">
+							  			<label>
+							  				<%if(data[i].prescriptIcon==2){%>
+							  					<input type="radio" name="prescriptIcon" value="2" checked>
+							  				<%}else{%>
+							  					<input type="radio" name="prescriptIcon" value="2">
+							  				<%}%>
+							  				아파요
+							  			</label>
+							  			<img src="/images/emotion2.png" class="img-rounded" alt="Cinque Terre" width="50" height="50">
+									</div>
+								
+									<div class="radio">
+							  			<label>
+							  				<%if(data[i].prescriptIcon==3){%>
+							  					<input type="radio" name="prescriptIcon" value="3" checked>
+							  				<%}else{%>
+							  					<input type="radio" name="prescriptIcon" value="3">
+							  				<%}%>
+							  				이상있어요
+							  			</label>
+							  			<img src="/images/emotion3.png" class="img-rounded" alt="Cinque Terre" width="50" height="50">
+									</div>
+								
+									<div class="radio">
+							  			<label>
+							  				<%if(data[i].prescriptIcon==4){%>
+							  					<input type="radio" name="prescriptIcon" value="4" checked>
+							  				<%}else{%>
+							  					<input type="radio" name="prescriptIcon" value="4">
+							  				<%}%>
+							  				건강해요
+							  			</label>
+							  			<img src="/images/emotion4.png" class="img-rounded" alt="Cinque Terre" width="50" height="50">
+									</div>
+								
+									<div class="radio">
+							  			<label>
+							  				<%if(data[i].prescriptIcon==5){%>
+							  					<input type="radio" name="prescriptIcon" value="5" checked>
+							  				<%}else{%>
+							  					<input type="radio" name="prescriptIcon" value="5">
+							  				<%}%>
+							  				아주 건강해요
+							  			</label>
+							  			<img src="/images/emotion5.png" class="img-rounded" alt="Cinque Terre" width="50" height="50">
+									</div>
+									
+									<textarea class="form-control" rows="5" name="prescriptText"><%=data[i].prescriptText%></textarea>
+								</div>
+								<button type="submit" class="btn"> 등록 </button>
+							</form></li>
+			        	<%}%>
+		         	<%}%>
+		      	<% } %>
+		    </ul>
+		</div>
+	</body>
+</html>

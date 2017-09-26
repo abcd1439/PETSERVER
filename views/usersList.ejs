@@ -1,0 +1,35 @@
+<html>
+	<head>
+	    <meta charset="UTF-8">
+	    <link rel="shortcut icon" href="../images/ico_image.ico">
+	    <title>Pettner</title>
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+	    		<div class="navbar-header">
+	    			<a class="navbar-brand" href="#">Pettner</a>
+	    		</div>
+	    		<ul class="nav navbar-nav">
+	    			<li><a href="/webHospital/<%= data[0].hospitalId %>">병원 소개</a></li>
+	      			<li><a href="/webReserv/<%= data[0].hospitalId %>">예약 관리</a></li>
+	    			<li class="active"><a href="/webUsers/<%= data[0].hospitalId %>">고객 관리</a></li>
+	    			<li><a href="/webQna/<%= data[0].hospitalId %>">질문 관리</a></li>
+	    		</ul>
+	    		<ul class="nav navbar-nav navbar-right">
+	      			<li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+	    		</ul>
+	  		</div>
+		</nav>
+
+		<div>	
+		   <ul>
+		      <% for(var i = 0 ; i < data.length ; i++ ) { %>
+		         <li><a href="/webAnimals/<%=data[0].hospitalId%>"><%= data[i].name %></a></li>
+		      <% } %>
+		   </ul>
+		</div>
+	</body>
+</html>

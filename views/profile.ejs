@@ -1,0 +1,37 @@
+<html>
+  <head>
+      <meta charset="UTF-8">
+      <link rel="shortcut icon" href="../images/ico_image.ico">
+      <title>Pettner</title>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <p>
+<form action="/fbId" method="post">
+
+  <% if (user) { %>
+    <div class="form-group">
+      <label for="fbId">Facebook Id:</label>
+      <input type="text" class="form-control" name="fbId" value="<%=user.id%>">
+    </div>
+    <p> Display Name: <%= user.displayName %></p>
+    <p> Gender: <%= user.gender %></p>
+    <p> Email:<%= user.email %></p>
+    <p> Provider:<%= user.provider %></p>
+    <p> Profile URL: <a href="<%= user.profileUrl %>">click here </a></p>
+    <p> Photo: <img src="<%= user.photo %>" alt=""></p>
+  <% } else { %>
+    <p>User not found</p>
+  <% }  %>
+  </p>
+    
+   <button type="submit" class="btn"> 접속 </button>
+ 
+ 
+  <h2>
+    <a href="/logout">Click here to logout</a>
+  </h2>
+
+  </body>
+</html>
